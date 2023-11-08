@@ -10,7 +10,7 @@ char *input_str(char *c){
     long long i=0; 
     char* str= malloc(m);
     if(!str) return NULL; 
-    while(*c && *c!= EOF && *c!='\n' && !strchr(" &|;.><()",*c)){
+    while(*c && *c!= EOF && *c!='\n' && !strchr(" &|;.><()",*c)){ 
         if(*c=='"'){
             *c=getchar(); 
             while(*c!='"'){ 
@@ -55,12 +55,15 @@ void input(char** str){
     char c; 
     long long i=0; 
      while((c=getchar())!=EOF){ 
-        if(!op) start=1;
+        if(!op) start=i;
         if((op!=0) && (c=='\n')){
-            printf("You entered wrong amount of brackets!"); 
-            for(int j=i-1; j>=start; j++) free(str[j]); 
-            i=start; 
-            op=0;
+            printf("You entered wrong amount of brackets!\n"); 
+            if( op>0){
+                for(int j=i-1; j>=start; j++) free(str[j]); 
+                i=start; 
+                op=0;
+            }
+             c=getchar(); 
         }
         if(c==' ' || c=='\n') continue;
         if(strchr("&|><", c) && str[i-1][0]==c && str[i-1][1]=='\0'){ 
@@ -73,7 +76,7 @@ void input(char** str){
         if(i%m==0) str=realloc(str, sizeof(char*)*(m+i)); 
         if( str[i-1]==NULL || (c=='\n' && op)){
             printf("You entered wrong amount of brackets or quotes!\n"); 
-            for(int j=i-1; j>=start; j++) free(str[j]); 
+            if(op>0)for(int j=i-1; j>=start; j++) free(str[j]); 
             i=start; 
             op=0; 
             continue;
