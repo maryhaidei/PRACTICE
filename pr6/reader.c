@@ -34,7 +34,8 @@ void reader(void){
     op.sem_op=1;
     semop(semid, &op, 1);
     //read
-    while(strcpy(str, smaddr)!=NULL) printf("%s\n", str);
+    int i=0; 
+    while(smaddr[i]) printf("%c", smaddr[i++]); 
     op.sem_num=0; 
     op.sem_op=-1;
     semop(semid, &op, 1);
@@ -59,6 +60,9 @@ int main(){
     semid=semget(key,3, IPC_CREAT|0666 );
     op.sem_num=0;
     op.sem_flg=0;
+    semctl(semid, 0, SETVAL, (int) 1); 
+    semctl(semid, 1, SETVAL, (int) 1); 
+    semctl(semid, 2, SETVAL, (int) 0); 
     reader();
     return 0;
 }

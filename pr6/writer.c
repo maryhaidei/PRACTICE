@@ -33,6 +33,9 @@ int main(){
     shmid=shmget(key, N, IPC_CREAT|0666);
     smaddr=shmat(shmid, NULL, 0);
     semid=semget(key,3, IPC_CREAT|0666 );
+    semctl(semid, 0, SETVAL, (int) 1); 
+    semctl(semid, 1, SETVAL, (int) 1); 
+    semctl(semid, 2, SETVAL, (int) 0); 
     writer();
     return 0;
 }
