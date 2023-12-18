@@ -37,5 +37,6 @@ int main(){
     semctl(semid, 1, SETVAL, (int) 1); 
     semctl(semid, 2, SETVAL, (int) 0); 
     writer();
+    printf("\n");
     return 0;
 }

@@ -36,6 +36,7 @@ void reader(void){
     //read
     int i=0; 
     while(smaddr[i]) printf("%c", smaddr[i++]); 
+    printf("\n"); 
     op.sem_num=0; 
     op.sem_op=-1;
     semop(semid, &op, 1);
