@@ -65,5 +65,7 @@ int main(){
     semctl(semid, 1, SETVAL, (int) 1); 
     semctl(semid, 2, SETVAL, (int) 0); 
     reader();
+    semctl(semid, 0, IPC_RMID, 0); 
+    shmctl(shmid, IPC_RMID, NULL); 
     return 0;
 }

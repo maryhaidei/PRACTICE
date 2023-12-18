@@ -38,5 +38,7 @@ int main(){
     semctl(semid, 2, SETVAL, (int) 0); 
     writer();
     printf("\n");
+    semctl(semid, 0, IPC_RMID, 0); 
+    shmctl(shmid, IPC_RMID, NULL); 
     return 0;
 }
